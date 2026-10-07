@@ -1,0 +1,55 @@
+---
+import Logo from './Logo.astro';
+import { BUSINESS, NAV_LINKS } from '../lib/site';
+import { SERVICES } from '../lib/content';
+
+const year = new Date().getFullYear();
+const { street, city, region, postalCode } = BUSINESS.address;
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${street}, ${city}, ${region} ${postalCode}`)}`;
+---
+
+<footer class="bg-ink-950 text-ink-200">
+  <div class="container mx-auto grid gap-12 px-4 py-16 md:grid-cols-2 lg:grid-cols-4">
+    <div class="lg:col-span-1">
+      <Logo inverted />
+      <p class="mt-5 max-w-xs text-sm leading-relaxed text-ink-300">
+        Conflict resolution, mediation, and workplace law guidance for public sector employees.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-body text-sm font-semibold uppercase tracking-wider text-white">Services</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {SERVICES.map((s) => <li><a href={`/services#${s.slug}`} class="hover:text-white">{s.title}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="font-body text-sm font-semibold uppercase tracking-wider text-white">Explore</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {NAV_LINKS.map(({ href, label }) => <li><a href={href} class="hover:text-white">{label}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="font-body text-sm font-semibold uppercase tracking-wider text-white">Get in touch</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        <li><a href={`tel:${BUSINESS.phone}`} class="hover:text-white">{BUSINESS.phoneDisplay}</a></li>
+        <li><a href={`mailto:${BUSINESS.email}`} class="hover:text-white">{BUSINESS.email}</a></li>
+        <li>
+          <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white">
+            {street}<br />{city}, {region} {postalCode}
+          </a>
+        </li>
+        {BUSINESS.hours.map((h) => <li class="text-ink-400">{h.days}: {h.time}</li>)}
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container mx-auto flex flex-col gap-2 px-4 py-6 text-xs text-ink-400 md:flex-row md:justify-between">
+      <p>&copy; {year} {BUSINESS.name}. All rights reserved.</p>
+      <p>Protect and Empower is not a law firm and does not provide legal advice. We refer clients to licensed attorneys when legal action is needed.</p>
+    </div>
+  </div>
+</footer>

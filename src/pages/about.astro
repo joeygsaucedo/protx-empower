@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { BUSINESS } from '../lib/site';
+
+// TODO: the old site had no About copy. Add the founder's story, background,
+// and a photo here once the owner provides them.
+const principles = [
+  {
+    icon: 'shield',
+    title: 'Dignity first',
+    body: 'Every employee deserves to be treated with respect at work. That belief drives everything we do.',
+  },
+  {
+    icon: 'chat',
+    title: 'Communication that works',
+    body: 'We promote clear, effective communication so both employees and employers can be heard.',
+  },
+  {
+    icon: 'handshake',
+    title: 'Collaboration over conflict',
+    body: 'Mediation builds understanding between public sector employees and their employers.',
+  },
+] as const;
+---
+
+<Layout
+  title={`About | ${BUSINESS.name}`}
+  description="Protect and Empower is dedicated to fostering a harmonious workplace for public sector employees through conflict resolution and mediation."
+>
+  <PageHeader
+    eyebrow="About us"
+    title="Empowering public sector employees to resolve workplace challenges"
+  />
+
+  <section class="py-20">
+    <div class="container mx-auto grid max-w-6xl gap-16 px-4 lg:grid-cols-2">
+      <div class="space-y-5 text-lg leading-relaxed text-ink-700">
+        <p>
+          At Protect and Empower, we specialize in providing expert conflict resolution and mediation services
+          tailored specifically for public sector employees.
+        </p>
+        <p>
+          Our dedicated team is committed to fostering a harmonious workplace environment by addressing
+          employment and workplace law issues with professionalism and care.
+        </p>
+        <p>
+          Let us help you navigate challenges and empower you to achieve effective solutions.
+        </p>
+      </div>
+      <div class="rounded-2xl bg-ink-900 p-10 text-white">
+        <p class="eyebrow !text-brand-300">Who we serve</p>
+        <ul class="mt-6 space-y-4 text-lg">
+          <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-brand-500"></span>Individual public sector employees facing workplace issues</li>
+          <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-brand-500"></span>Employee groups seeking guidance on employment and workplace law</li>
+          <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-brand-500"></span>Negotiating teams looking for consulting and mediation support</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sand-100 py-20">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-semibold">What we stand for</h2>
+      <div class="mt-12 grid gap-8 md:grid-cols-3">
+        {
+          principles.map((p) => (
+            <div class="rounded-2xl bg-white p-8 ring-1 ring-sand-200">
+              <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                <Icon name={p.icon} />
+              </span>
+              <h3 class="mt-5 text-2xl font-semibold">{p.title}</h3>
+              <p class="mt-3 leading-relaxed text-ink-600">{p.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

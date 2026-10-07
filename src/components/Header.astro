@@ -1,0 +1,79 @@
+---
+import Logo from './Logo.astro';
+import { BUSINESS, NAV_LINKS } from '../lib/site';
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => currentPath === href;
+---
+
+<div class="hidden bg-ink-950 text-sm text-ink-200 md:block">
+  <div class="container mx-auto flex items-center justify-end gap-6 px-4 py-2">
+    <span>Mon to Fri, 9 am to 6 pm</span>
+    <a href={`tel:${BUSINESS.phone}`} class="hover:text-white">{BUSINESS.phoneDisplay}</a>
+    <a href={`mailto:${BUSINESS.email}`} class="hover:text-white">{BUSINESS.email}</a>
+  </div>
+</div>
+
+<header class="sticky top-0 z-50 border-b border-ink-100 bg-white/95 backdrop-blur">
+  <nav class="container mx-auto px-4" aria-label="Main">
+    <div class="flex h-20 items-center justify-between">
+      <a href="/" aria-label={`${BUSINESS.name} home`}>
+        <Logo />
+      </a>
+
+      <div class="hidden items-center gap-8 lg:flex">
+        {
+          NAV_LINKS.map(({ href, label }) => (
+            <a
+              href={href}
+              aria-current={isActive(href) ? 'page' : undefined}
+              class={`font-medium transition-colors hover:text-brand-600 ${isActive(href) ? 'text-brand-600' : 'text-ink-700'}`}
+            >
+              {label}
+            </a>
+          ))
+        }
+        <a href="/contact" class="btn-primary !py-2.5 !px-6">Free Consultation</a>
+      </div>
+
+      <button
+        id="mobile-menu-button"
+        class="rounded-md p-2 text-ink-800 lg:hidden"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden pb-6 lg:hidden">
+      <div class="flex flex-col gap-1">
+        {
+          NAV_LINKS.map(({ href, label }) => (
+            <a
+              href={href}
+              aria-current={isActive(href) ? 'page' : undefined}
+              class={`rounded-md px-3 py-2.5 font-medium hover:bg-sand-100 ${isActive(href) ? 'text-brand-600' : 'text-ink-700'}`}
+            >
+              {label}
+            </a>
+          ))
+        }
+        <a href={`tel:${BUSINESS.phone}`} class="btn-primary mt-3">Call {BUSINESS.phoneDisplay}</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuButton?.addEventListener('click', () => {
+    const open = mobileMenu?.classList.toggle('hidden') === false;
+    menuButton.setAttribute('aria-expanded', String(open));
+  });
+</script>

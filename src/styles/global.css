@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+
+/* Tailwind 4 reads theme values from CSS custom properties.
+   ink: deep navy for trust and authority.
+   brand: the red from the existing handshake logo.
+   sand: warm neutral so the site doesn't feel cold or bureaucratic. */
+@theme {
+  --color-ink-50: #f3f6fa;
+  --color-ink-100: #e4eaf3;
+  --color-ink-200: #c9d4e5;
+  --color-ink-300: #9fb2cf;
+  --color-ink-400: #6e88b0;
+  --color-ink-500: #4b6893;
+  --color-ink-600: #385179;
+  --color-ink-700: #2d4163;
+  --color-ink-800: #1f2e48;
+  --color-ink-900: #142035;
+  --color-ink-950: #0b1322;
+
+  --color-brand-50: #fdf3f3;
+  --color-brand-100: #fbe4e5;
+  --color-brand-200: #f6c9cb;
+  --color-brand-300: #ee9fa3;
+  --color-brand-400: #e26a71;
+  --color-brand-500: #d4434b;
+  --color-brand-600: #c02a33;
+  --color-brand-700: #a12029;
+  --color-brand-800: #861e26;
+  --color-brand-900: #701e25;
+
+  --color-sand-50: #fbf9f6;
+  --color-sand-100: #f5f1ea;
+  --color-sand-200: #ebe3d6;
+  --color-sand-300: #dccfb9;
+
+  --font-heading: Fraunces, Georgia, serif;
+  --font-body: Inter, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-ink-900 bg-sand-50 antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-balance;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 px-7 py-3.5 font-semibold text-white shadow-sm transition-colors hover:bg-brand-700;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-current px-7 py-3.5 font-semibold transition-colors;
+  }
+
+  .eyebrow {
+    @apply text-sm font-semibold uppercase tracking-[0.18em] text-brand-600;
+  }
+}

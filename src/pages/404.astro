@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { BUSINESS } from '../lib/site';
+---
+
+<Layout title={`Page not found | ${BUSINESS.name}`} noindex>
+  <section class="container mx-auto px-4 py-32 text-center">
+    <p class="eyebrow">404</p>
+    <h1 class="mt-4 text-5xl font-semibold">We couldn't find that page</h1>
+    <p class="mt-4 text-lg text-ink-600">It may have moved when we redesigned the site.</p>
+    <a href="/" class="btn-primary mt-10">Back to home</a>
+  </section>
+</Layout>
